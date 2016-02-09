@@ -213,9 +213,20 @@ module Net
             b = Blob.new
             b.timestamp = timestamp
             b.challenge = client_challenge
-            b.target_info = challenge_message.target_info
+            b.target_info = inject_cbt
             b.serialize
+            # require 'pry'
+            # binding.pry
           end
+      end
+
+      def inject_cbt
+        cbt = "\x0A\x00\x10\x00\x04\x0E\x56\x28\xEC\x4A\x98\x29\x91\x70\x73\x62\x03\x7B\xB2\x3C".force_encoding(Encoding::ASCII_8BIT)
+
+        target_info = challenge_message.target_info
+        target_info.insert(target_info.length-4, cbt)
+
+        target_info
       end
 
     end

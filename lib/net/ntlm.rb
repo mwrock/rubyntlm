@@ -60,6 +60,7 @@ require 'net/ntlm/message/type3'
 require 'net/ntlm/encode_util'
 
 require 'net/ntlm/client'
+require 'net/ntlm/channel_binding'
 
 module Net
   module NTLM
